@@ -26,7 +26,7 @@ iex> ProvincesDr.provinces
    {"13", "La Altagracia"},
    {"14", "La Romana"},
    {"15", "La Vega"},
-   {"16", "María Trinidad Sánchez"}, 
+   {"16", "María Trinidad Sánchez"},
    {"17", "Monseñor Nouel"},
    {"18", "Monte Cristi"},
    {"19", "Monte Plata"},
