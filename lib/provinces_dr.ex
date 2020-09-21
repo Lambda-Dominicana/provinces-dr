@@ -6,9 +6,6 @@ defmodule ProvincesDr do
 
   alias ProvincesDr.Utils
 
-
-
-
   # Create functions to provindec municipalities
   for line <- File.stream!(provinces_path, [], :line) do
     [province, municipalities, municipal_districts] = String.split(line, "|")
