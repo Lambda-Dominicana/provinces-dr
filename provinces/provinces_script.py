@@ -21,27 +21,29 @@ def get_municipal_districts(id_province: int) -> None:
 
   return request_api(url)
 
+def parser_data(values) -> str:
+  return ",".join(list(map(
+      lambda x: f'{x.get("codigo")}:{x.get("nombre")}',
+      values
+    )))
+
 def save_provinces_details(provinces: list) -> None:
   for province in provinces:
     province_id = province.get("codigo", 0)
-    municipalities = ",".join(list(map(
-      lambda x: f'{x.get("codigo")}:{x.get("nombre")}',
-      get_municipalities(province_id)
-    )))
-    municipal_districts = ",".join(list(map(
-      lambda x: f'{x.get("codigo")}:{x.get("nombre")}',
-      get_municipal_districts(province_id)
-    )))
+    municipalities = get_municipalities(province_id)
+    municipal_districts = get_municipal_districts(province_id)
+    
+    # parser
+    municipalities = parser_data(municipalities)
+    municipal_districts = parser_data(municipal_districts)
 
     with open('provinces_details.txt', 'a') as fl:
       line = f'{province.get("codigo")},{province.get("nombre")}|{municipalities}|{municipal_districts}\n'
       fl.write(line)
 
 def save_provinces(provinces: list) -> None:
-  provinces_parsed = ",".join(list(map(
-    lambda x: f'{x.get("codigo")}:{x.get("nombre")}',
-    provinces
-  )))
+  provinces_parsed = parser_data(provinces)
+
   with open('provinces.txt', 'a') as fl:
       fl.write(provinces_parsed)
 
