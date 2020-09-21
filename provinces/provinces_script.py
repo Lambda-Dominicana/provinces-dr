@@ -21,9 +21,7 @@ def get_municipal_districts(id_province: int) -> None:
 
   return request_api(url)
 
-def main():
-  provinces = get_provinces()
-
+def save_provinces_details(provinces: list) -> None:
   for province in provinces:
     province_id = province.get("codigo", 0)
     municipalities = ",".join(list(map(
@@ -35,9 +33,23 @@ def main():
       get_municipal_districts(province_id)
     )))
 
-    with open('provinces.txt', 'a') as fl:
+    with open('provinces_details.txt', 'a') as fl:
       line = f'{province.get("codigo")},{province.get("nombre")}|{municipalities}|{municipal_districts}\n'
       fl.write(line)
+
+def save_provinces(provinces: list) -> None:
+  provinces_parsed = ",".join(list(map(
+    lambda x: f'{x.get("codigo")}:{x.get("nombre")}',
+    provinces
+  )))
+  with open('provinces.txt', 'a') as fl:
+      fl.write(provinces_parsed)
+
+def main():
+  provinces = get_provinces()
+  
+  # save_provinces(provinces)
+  save_provinces_details(provinces)
 
 if __name__ == '__main__':
   main()
