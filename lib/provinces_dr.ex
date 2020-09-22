@@ -147,8 +147,6 @@ defmodule ProvincesDr do
 
   ## Examples
 
-      iex> ProvincesDr.province()
-      {:error, "Not foun with this code."}
       iex> ProvincesDr.province("2")
       {:ok,
         [
