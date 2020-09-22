@@ -14,10 +14,8 @@ defmodule ProvincesDr do
       |> String.split(",", trim: true)
       |> Enum.map(&(Utils.parser_values(&1, ":")))
 
-    def provinces() do
-      unquote(
-        Macro.escape({ :ok, provinces})
-      )
+    def provinces!() do
+      unquote Macro.escape provinces
     end
   end
 
@@ -52,7 +50,7 @@ defmodule ProvincesDr do
   end
 
   @doc """
-  Get all provinces.
+  Get all provinces with tuple with status of result.
 
   ## Examples
 
@@ -91,9 +89,55 @@ defmodule ProvincesDr do
           {"30", "Santiago Rodríguez"},
           {"31", "Santo Domingo"},
           {"32", "Valverde"}
-        ]}
+        ]
+      }
   """
-  def provinces()
+  @spec provinces :: {:ok, [{ String.t(), String.t()}]}
+  def provinces(), do: {:ok, provinces!()}
+
+  @doc """
+  Get all provinces without tuple with status of result.
+
+  ## Examples
+
+      iex> ProvincesDr.provinces!()
+      [
+        {"1", "Azua"},
+        {"2", "Bahoruco"},
+        {"3", "Barahona"},
+        {"4", "Dajabón"},
+        {"5", "Distrito Nacional"},
+        {"6", "Duarte"},
+        {"7", "Elías Piña"},
+        {"8", "El Seibo"},
+        {"9", "Espaillat"},
+        {"10", "Hato Mayor"},
+        {"11", "Hermanas Mirabal"},
+        {"12", "Independencia"},
+        {"13", "La Altagracia"},
+        {"14", "La Romana"},
+        {"15", "La Vega"},
+        {"16", "María Trinidad Sánchez"},
+        {"17", "Monseñor Nouel"},
+        {"18", "Monte Cristi"},
+        {"19", "Monte Plata"},
+        {"20", "Pedernales"},
+        {"21", "Peravia"},
+        {"22", "Puerto Plata"},
+        {"23", "Samaná"},
+        {"24", "Sánchez Ramírez"},
+        {"25", "San Cristóbal"},
+        {"26", "San José de Ocoa"},
+        {"27", "San Juan"},
+        {"28", "San Pedro de Macorís"},
+        {"29", "Santiago"},
+        {"30", "Santiago Rodríguez"},
+        {"31", "Santo Domingo"},
+        {"32", "Valverde"}
+      ]
+  """
+  @spec provinces! :: [{ String.t(), String.t()}]
+  def provinces!()
 
   @doc """
   Get all Municipalities and Municipal Disctrics from a provindece code.
@@ -131,5 +175,6 @@ defmodule ProvincesDr do
         ]}
 
   """
+  @spec province(String.t()) :: {:error, Stirng.t()} | {:ok, List.t()}
   def province(_code), do: {:error, "Not found with this code."}
 end
