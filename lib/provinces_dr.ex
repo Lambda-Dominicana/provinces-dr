@@ -2,8 +2,8 @@ defmodule ProvincesDr do
   @moduledoc """
   Documentation for `ProvincesDr`.
   """
-  @external_resource provinces_path = "provinces/provinces.txt"
-  @external_resource provinces_details_path = "provinces/provinces_details.txt"
+  @external_resource provinces_path = "src/provinces.txt"
+  @external_resource provinces_details_path = "src/provinces_details.txt"
 
   alias ProvincesDr.Utils
 
