@@ -36,12 +36,6 @@ defmodule ProvincesDr.MixProject do
     """
     Elixir library to get all `Provinces/Municiplaities/Municipal Ditrics`
     of Dominican Republic 🇩🇴.
-
-    Created to practice metaprogramming in elixir and the generation of
-    functions using external data.
-    The functions functions `&ProvincesDr.provinces/0` and `&ProvincesDr.province/1`
-    was generated using macros and all dataset is there on
-    file `provinces/provinces.txt` and `provinces/provinces_details.txt`.
     """
   end
 
